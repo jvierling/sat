@@ -3,7 +3,7 @@ package at.skagen.apps.sat.parser.interpretation;
 import java.util.LinkedList;
 import java.util.List;
 
-import at.skagen.apps.sat.parser.formula.LexerException;
+import at.skagen.apps.sat.formula.parser.LexerException;
 import static at.skagen.apps.sat.parser.interpretation.Symbols.*;
 
 public class InterpretationLexer {

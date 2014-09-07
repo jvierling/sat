@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import at.skagen.apps.sat.parser.formula.LexerException;
-import at.skagen.apps.sat.parser.formula.ParserException;
+import at.skagen.apps.sat.formula.parser.LexerException;
+import at.skagen.apps.sat.formula.parser.ParserException;
 import static at.skagen.apps.sat.parser.interpretation.Symbols.*;
 
 public class InterpretationParser {

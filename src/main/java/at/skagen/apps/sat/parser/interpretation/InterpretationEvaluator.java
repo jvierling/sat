@@ -2,8 +2,8 @@ package at.skagen.apps.sat.parser.interpretation;
 
 import java.util.HashMap;
 
-import at.skagen.apps.sat.parser.formula.EvaluatorException;
-import at.skagen.apps.sat.parser.formula.ParserException;
+import at.skagen.apps.sat.formula.evaluation.EvaluatorException;
+import at.skagen.apps.sat.formula.parser.ParserException;
 import static at.skagen.apps.sat.parser.interpretation.Symbols.*;
 
 public class InterpretationEvaluator {
