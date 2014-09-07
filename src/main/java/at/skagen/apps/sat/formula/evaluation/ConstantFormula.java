@@ -1,11 +1,9 @@
 package at.skagen.apps.sat.formula.evaluation;
 
-import java.util.Set;
-
 import at.skagen.apps.sat.formula.node.ConstantNode;
 import at.skagen.apps.sat.formula.node.FormulaNode;
 
-public class ConstantFormula extends UnexpandableFormula {
+public class ConstantFormula extends AtomicFormula {
 
 	private ConstantNode constant;
 	
@@ -24,7 +22,16 @@ public class ConstantFormula extends UnexpandableFormula {
 		return value;
 	}
 
-	public boolean isClosed(Set<TableauFormula> formulas) {
+	public boolean isAtomic() {
+		return true;
+	}
+
+	public boolean isContradictory() {
 		return constant.getValue() != value;
+	}
+
+	public boolean isContradictory(TableauFormula formula) {
+		return formula.getFormula().equals(this.constant)
+				&& formula.getValue() != this.value;
 	}
 }

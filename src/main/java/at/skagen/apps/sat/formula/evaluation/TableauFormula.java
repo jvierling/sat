@@ -1,7 +1,5 @@
 package at.skagen.apps.sat.formula.evaluation;
 
-import java.util.Set;
-
 import at.skagen.apps.sat.formula.node.FormulaNode;
 
 public interface TableauFormula {
@@ -10,7 +8,9 @@ public interface TableauFormula {
 	
 	public boolean getValue();
 	
-	public boolean isClosed(Set<TableauFormula> formulas);
+	public boolean isAtomic();
 	
-	public boolean isExpandable();
+	public boolean isContradictory();
+	
+	public boolean isContradictory(TableauFormula formula);
 }

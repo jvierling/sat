@@ -31,9 +31,9 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 	@Override
 	public String evaluate() throws EvaluatorException {
 		
-		TableauNode root = new InnerNode(formula.toTableauFormula(this, true));
+		TableauNode root = new TableauNode(formula.toTableauFormula(this, true));
 		
-		expandFormulas(root, new HashSet<TableauFormula>(), new HashSet<TableauFormula>());
+		expandFormulas(root, new HashSet<TableauFormula>());
 		
 		return renderSurface(root.renderTableau());
 	}
@@ -62,7 +62,7 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 			formulas.add(formula.getLeftChild().toTableauFormula(this, true));
 			formulas.add(formula.getRightChild().toTableauFormula(this, true));
 			
-			nodes.add(new InnerNode(formulas, "and"));
+			nodes.add(new TableauNode(formulas));
 		} else {
 			Set<TableauFormula> formulas1 = new HashSet<TableauFormula>();
 			formulas1.add(formula.getRightChild().toTableauFormula(this, false));
@@ -70,8 +70,8 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 			Set<TableauFormula> formulas2 = new HashSet<TableauFormula>();
 			formulas2.add(formula.getLeftChild().toTableauFormula(this, false));
 			
-			nodes.add(new InnerNode(formulas1, "and"));
-			nodes.add(new InnerNode(formulas2, "and"));
+			nodes.add(new TableauNode(formulas1));
+			nodes.add(new TableauNode(formulas2));
 		}
 		
 		return nodes;
@@ -90,8 +90,8 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 			formulas2.add(formula.getLeftChild().toTableauFormula(this, true));
 			formulas2.add(formula.getRightChild().toTableauFormula(this, false));
 			
-			nodes.add(new InnerNode(formulas1, "xor"));
-			nodes.add(new InnerNode(formulas2, "xor"));
+			nodes.add(new TableauNode(formulas1));
+			nodes.add(new TableauNode(formulas2));
 		} else {
 			Set<TableauFormula> formulas1 = new HashSet<TableauFormula>();
 			formulas1.add(formula.getLeftChild().toTableauFormula(this, false));
@@ -101,8 +101,8 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 			formulas2.add(formula.getLeftChild().toTableauFormula(this, true));
 			formulas2.add(formula.getRightChild().toTableauFormula(this, true));
 			
-			nodes.add(new InnerNode(formulas1, "xor"));
-			nodes.add(new InnerNode(formulas2, "xor"));
+			nodes.add(new TableauNode(formulas1));
+			nodes.add(new TableauNode(formulas2));
 		}
 		
 		return nodes;
@@ -118,7 +118,7 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 			formulas.add(formula.getRightChild().toTableauFormula(this, false));
 			formulas.add(formula.getLeftChild().toTableauFormula(this, false));
 			
-			nodes.add(new InnerNode(formulas, "nor"));
+			nodes.add(new TableauNode(formulas));
 		} else {
 			Set<TableauFormula> formulas1 = new HashSet<TableauFormula>();
 			formulas1.add(formula.getRightChild().toTableauFormula(this, true));
@@ -126,8 +126,8 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 			Set<TableauFormula> formulas2 = new HashSet<TableauFormula>();
 			formulas2.add(formula.getLeftChild().toTableauFormula(this, true));
 			
-			nodes.add(new InnerNode(formulas1, "nor"));
-			nodes.add(new InnerNode(formulas2, "nor"));
+			nodes.add(new TableauNode(formulas1));
+			nodes.add(new TableauNode(formulas2));
 		}
 		
 		return nodes;
@@ -144,15 +144,15 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 			Set<TableauFormula> formulas2 = new HashSet<TableauFormula>();
 			formulas2.add(formula.getLeftChild().toTableauFormula(this, false));
 			
-			nodes.add(new InnerNode(formulas1, "nor"));
-			nodes.add(new InnerNode(formulas2, "nor"));
+			nodes.add(new TableauNode(formulas1));
+			nodes.add(new TableauNode(formulas2));
 		} else {
 			Set<TableauFormula> formulas = new HashSet<TableauFormula>();
 			
 			formulas.add(formula.getRightChild().toTableauFormula(this, true));
 			formulas.add(formula.getLeftChild().toTableauFormula(this, true));
 			
-			nodes.add(new InnerNode(formulas, "nor"));
+			nodes.add(new TableauNode(formulas));
 		}
 		
 		return nodes;
@@ -171,8 +171,8 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 			formulas2.add(formula.getRightChild().toTableauFormula(this, true));
 			formulas2.add(formula.getLeftChild().toTableauFormula(this, true));
 			
-			nodes.add(new InnerNode(formulas1, "iff"));
-			nodes.add(new InnerNode(formulas2, "iff"));
+			nodes.add(new TableauNode(formulas1));
+			nodes.add(new TableauNode(formulas2));
 		} else {
 			Set<TableauFormula> formulas1 = new HashSet<TableauFormula>();
 			formulas1.add(formula.getLeftChild().toTableauFormula(this, true));
@@ -182,8 +182,8 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 			formulas2.add(formula.getLeftChild().toTableauFormula(this, false));
 			formulas2.add(formula.getRightChild().toTableauFormula(this, true));
 			
-			nodes.add(new InnerNode(formulas1, "iff"));
-			nodes.add(new InnerNode(formulas2, "iff"));
+			nodes.add(new TableauNode(formulas1));
+			nodes.add(new TableauNode(formulas2));
 		}
 		
 		return nodes;
@@ -196,12 +196,12 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 		if (value) {
 			Set<TableauFormula> formulas = new HashSet<TableauFormula>();
 			formulas.add(formula.getOperand().toTableauFormula(this, false));
-			nodes.add(new InnerNode(formulas, "not"));
+			nodes.add(new TableauNode(formulas));
 			
 		} else {
 			Set<TableauFormula> formulas = new HashSet<TableauFormula>();
 			formulas.add(formula.getOperand().toTableauFormula(this, true));
-			nodes.add(new InnerNode(formulas, "not"));
+			nodes.add(new TableauNode(formulas));
 		}
 		
 		return nodes;
@@ -217,15 +217,15 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 			Set<TableauFormula> formulas2 = new HashSet<TableauFormula>();
 			formulas2.add(formula.getRightChild().toTableauFormula(this, true));
 			
-			nodes.add(new InnerNode(formulas1, "if"));
-			nodes.add(new InnerNode(formulas2, "if"));
+			nodes.add(new TableauNode(formulas1));
+			nodes.add(new TableauNode(formulas2));
 			
 		} else {
 			Set<TableauFormula> formulas = new HashSet<TableauFormula>();
 			formulas.add(formula.getLeftChild().toTableauFormula(this, true));
 			formulas.add(formula.getRightChild().toTableauFormula(this, false));
 			
-			nodes.add(new InnerNode(formulas, "not"));
+			nodes.add(new TableauNode(formulas));
 		}
 		
 		return nodes;
@@ -241,15 +241,15 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 			Set<TableauFormula> formulas2 = new HashSet<TableauFormula>();
 			formulas2.add(formula.getRightChild().toTableauFormula(this, true));
 			
-			nodes.add(new InnerNode(formulas1, "if"));
-			nodes.add(new InnerNode(formulas2, "if"));
+			nodes.add(new TableauNode(formulas1));
+			nodes.add(new TableauNode(formulas2));
 			
 		} else {
 			Set<TableauFormula> formulas = new HashSet<TableauFormula>();
 			formulas.add(formula.getLeftChild().toTableauFormula(this, false));
 			formulas.add(formula.getRightChild().toTableauFormula(this, false));
 			
-			nodes.add(new InnerNode(formulas, "not"));
+			nodes.add(new TableauNode(formulas));
 		}
 		
 		return nodes;
@@ -259,7 +259,7 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 		
 		List<TableauNode> nodes = new LinkedList<TableauNode>();
 		
-		nodes.add(new InnerNode(new ConstantFormula(formula, value)));
+		nodes.add(new TableauNode(new ConstantFormula(formula, value)));
 		
 		return nodes;
 	}
@@ -268,28 +268,24 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 		
 		List<TableauNode> nodes = new LinkedList<TableauNode>();
 		
-		nodes.add(new InnerNode(new VariableFormula(formula, value)));
+		nodes.add(new TableauNode(new VariableFormula(formula, value)));
 		
 		return nodes;
 	}
 	
-	private void expandFormulas(TableauNode root, Set<TableauFormula> formulas, Set<TableauFormula> unexpanded) {
-		
-		formulas.addAll(root.getFormulas());
-		
+	private void expandFormulas(TableauNode root, Set<TableauFormula> unexpanded) {
 		for (TableauFormula formula : root.getFormulas()) {
-			if (formula.isExpandable()) {
+			if (!formula.isAtomic()) {
 				unexpanded.add(formula);
 			}
 		}
-		for (TableauFormula formula : root.getFormulas()) {
-			if (formula.isClosed(formulas)) {
-				root.addChild(new ClosedNode());
-				return;
-			}
+		System.out.println("depth");
+		if (root.isClosed()) {
+			System.out.println("closed");
+			return;
 		}
 		if (unexpanded.isEmpty()) {
-			root.addChild(new UnclosedNode());
+			System.out.println("unclosed");
 			return;
 		}
 		
@@ -298,59 +294,36 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 		
 		for (TableauNode node : formula.getFormula().evaluateTableau(this, formula.getValue())) {
 			root.addChild(node);
-			expandFormulas(node, new HashSet<TableauFormula>(formulas), new HashSet<TableauFormula>(unexpanded));
+			expandFormulas(node, new HashSet<TableauFormula>(unexpanded));
 		}
 	}
 	
-//	private void expandFormulas(TableauNode node, Set<TableauFormula> expanded, Set<TableauFormula> unexpanded) {
-//		for (TableauFormula formula : node.getFormulas()) {
-//			if (formula.isClosed(expanded, unexpanded)) {
-//				node.addChild(new ClosedNode());
-//				return;
-//			}
-//			if (!expanded.contains(formula)) {
-//				unexpanded.add(formula);
-//			}
-//		}
-//		if (unexpanded.isEmpty()) {
-//			node.addChild(new UnclosedNode());
-//			return;
-//		}
-//		TableauFormula formula = unexpanded.iterator().next();
-//		node.addChildren(formula.getFormula().evaluateTableau(this, formula.getValue()));
-//		unexpanded.remove(formula);
-//		expanded.add(formula);
-//		for (TableauNode child : node.getChildren()) {
-//			expandFormulas(child, new HashSet<TableauFormula>(expanded), new HashSet<TableauFormula>(unexpanded));
-//		}
-//	}
-	
 	public TableauFormula toTableauFormula(AndNode node, boolean value) {
-		return new ExpandableFormula(node, value);
+		return new ComplexFormula(node, value);
 	}
 	
 	public TableauFormula toTableauFormula(OrNode node, boolean value) {
-		return new ExpandableFormula(node, value);
+		return new ComplexFormula(node, value);
 	}
 
 	public TableauFormula toTableauFormula(NorNode node, boolean value) {
-		return new ExpandableFormula(node, value);
+		return new ComplexFormula(node, value);
 	}
 	
 	public TableauFormula toTableauFormula(NandNode node, boolean value) {
-		return new ExpandableFormula(node, value);
+		return new ComplexFormula(node, value);
 	}
 	
 	public TableauFormula toTableauFormula(IffNode node, boolean value) {
-		return new ExpandableFormula(node, value);
+		return new ComplexFormula(node, value);
 	}
 	
 	public TableauFormula toTableauFormula(XorNode node, boolean value) {
-		return new ExpandableFormula(node, value);
+		return new ComplexFormula(node, value);
 	}
 	
 	public TableauFormula toTableauFormula(NotNode node, boolean value) {
-		return new ExpandableFormula(node, value);
+		return new ComplexFormula(node, value);
 	}
 	
 	public TableauFormula toTableauFormula(ConstantNode node, boolean value) {
@@ -362,10 +335,10 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 	}
 	
 	public TableauFormula toTableauFormula(IfNode node, boolean value) {
-		return new ExpandableFormula(node, value);
+		return new ComplexFormula(node, value);
 	}
 	
 	public static void main(String[] args) throws EvaluatorException, ParserException {
-		System.out.println(new TableauEvaluation("0 iff A").evaluate());
+		System.out.println(new TableauEvaluation("A and B and C and 0").evaluate());
 	}
 }
