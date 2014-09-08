@@ -17,6 +17,7 @@ import at.skagen.apps.sat.formula.node.OrNode;
 import at.skagen.apps.sat.formula.node.VariableNode;
 import at.skagen.apps.sat.formula.node.XorNode;
 import at.skagen.apps.sat.formula.parser.ParserException;
+import at.skagen.apps.sat.ui.cli.TableauRenderer;
 
 public class TableauEvaluation extends UninterpretedEvaluation<String> {
 
@@ -25,31 +26,18 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 	public TableauEvaluation(String formula) throws ParserException {
 		this.formula = new FormulaParser().parse(formula).getRoot();
 	}
+	
 	/**
 	 * Evaluates a formulas satisfiability using tableau calculus.
 	 */
 	@Override
 	public String evaluate() throws EvaluatorException {
 		
-		TableauNode root = new TableauNode(formula.toTableauFormula(this, true));
+		TableauNode root = new TableauNode(formula.toTableauFormula(this, false));
 		
 		expandFormulas(root, new HashSet<TableauFormula>());
 		
-		return renderSurface(root.renderTableau());
-	}
-	
-	private String renderSurface(char[][] surface) {
-		
-		String result = "";
-		
-		for (int i = 0; i < surface.length; i++) {
-			for (int j = 0; j < surface[i].length; j++) {
-				result += surface[i][j];
-			}
-			result += "\n";
-		}
-		
-		return result.substring(0, result.length());
+		return new TableauRenderer().renderTableau(root);
 	}
 	
 	public List<TableauNode> evaluateTableau(AndNode formula, boolean value) {
@@ -279,13 +267,11 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 				unexpanded.add(formula);
 			}
 		}
-		System.out.println("depth");
+
 		if (root.isClosed()) {
-			System.out.println("closed");
 			return;
 		}
 		if (unexpanded.isEmpty()) {
-			System.out.println("unclosed");
 			return;
 		}
 		
@@ -339,6 +325,6 @@ public class TableauEvaluation extends UninterpretedEvaluation<String> {
 	}
 	
 	public static void main(String[] args) throws EvaluatorException, ParserException {
-		System.out.println(new TableauEvaluation("A and B and C and 0").evaluate());
+		System.out.println(new TableauEvaluation("A or A or A or A or A or A or A or A or A or A").evaluate());
 	}
 }

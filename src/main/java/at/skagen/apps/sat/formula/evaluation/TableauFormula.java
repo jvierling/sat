@@ -2,15 +2,36 @@ package at.skagen.apps.sat.formula.evaluation;
 
 import at.skagen.apps.sat.formula.node.FormulaNode;
 
-public interface TableauFormula {
+public abstract class TableauFormula {
 	
-	public FormulaNode getFormula();
+	private FormulaNode formula;
 	
-	public boolean getValue();
+	private boolean value;
 	
-	public boolean isAtomic();
+	public TableauFormula(FormulaNode formula, boolean value) {
+		this.formula = formula;
+		this.value   = value;
+	}
 	
-	public boolean isContradictory();
+	public FormulaNode getFormula() {
+		return formula;
+	}
 	
-	public boolean isContradictory(TableauFormula formula);
+	public boolean getValue() {
+		return value;
+	}
+	
+	public boolean isContradictory(TableauFormula formula) {
+		return formula.getFormula().equals(this.formula)
+				&& formula.getValue() != this.value;
+	}
+	
+	public abstract boolean isAtomic();
+	
+	public abstract boolean isContradictory();
+	
+	@Override
+	public String toString() {
+		return (value ? "1" : "0") + " : " + formula;
+	}
 }
