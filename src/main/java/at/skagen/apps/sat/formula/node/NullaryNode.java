@@ -1,6 +1,6 @@
 package at.skagen.apps.sat.formula.node;
 
-public abstract class NullaryNode extends FormulaNode {
+public abstract class NullaryNode implements FormulaNode {
 
 	private String symbol;
 	

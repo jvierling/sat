@@ -3,12 +3,11 @@ package at.skagen.apps.sat.formula.evaluation;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class CompleteInterpretedEvaluation<T> extends InterpretedEvaluation<T> {
+public abstract class CompleteInterpretedEvaluation<T> implements InterpretedEvaluation<T> {
 
 	/**
 	 * Evaluates a formula according to a completely specified interpretation.
 	 */
-	@Override
 	public abstract T evaluate() throws EvaluatorException;
 	
 	protected final void doSemanticalAnalysis(Map<String, Boolean> interpetations, Set<String> identifiers) 

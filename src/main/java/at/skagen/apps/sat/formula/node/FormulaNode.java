@@ -1,18 +1,13 @@
 package at.skagen.apps.sat.formula.node;
 
-import java.util.Set;
+/*
+ * Semantic checking right after parsing ? This needs to be done in the evaluator.
+ * 
+ */
 
-public abstract class FormulaNode implements BooleanEvaluatorNode, FormalEvaluatorNode, TableauEvaluatorNode {
+public interface FormulaNode {
 	
-	private boolean isEvaluated;
+	public void accept(Visitor<?, ?> visitior);
 	
-	public abstract Set<String> registerSymbols();
-	
-	public void setEvaluated(boolean isEvaluated) {
-		this.isEvaluated = isEvaluated;
-	}
-	
-	public boolean isEvaluated() {
-		return isEvaluated;
-	}
+	public <R, P> R accept(Visitor<R, P> visitor, P parameter);
 }

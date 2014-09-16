@@ -1,4 +1,4 @@
-package at.skagen.apps.sat.formula.evaluation;
+package at.skagen.apps.sat.formula.parser;
 
 import java.util.Iterator;
 
@@ -13,11 +13,6 @@ import at.skagen.apps.sat.formula.node.NotNode;
 import at.skagen.apps.sat.formula.node.OrNode;
 import at.skagen.apps.sat.formula.node.VariableNode;
 import at.skagen.apps.sat.formula.node.XorNode;
-import at.skagen.apps.sat.formula.parser.FormulaLexer;
-import at.skagen.apps.sat.formula.parser.FormulaTokens;
-import at.skagen.apps.sat.formula.parser.LexerException;
-import at.skagen.apps.sat.formula.parser.ParserException;
-import at.skagen.apps.sat.formula.parser.Token;
 import static at.skagen.apps.sat.formula.parser.FormulaTokens.*;
 
 public class FormulaParser {
@@ -26,9 +21,9 @@ public class FormulaParser {
 	
 	private Token currentToken = null;
 	
-	public ParseTree parse(String formula) throws ParserException {
+	public FormulaNode parse(String formula) throws ParserException {
 		
-		ParseTree result = null;
+		FormulaNode result = null;
 		
 		try {
 			tokens = new FormulaLexer().lex(formula).iterator();
@@ -38,9 +33,7 @@ public class FormulaParser {
 			}
 			currentToken = tokens.next();
 			
-			FormulaNode root = formula();
-			
-			result = new ParseTree(root);
+			result = formula();
 			
 		} catch (LexerException e) {
 			throw new ParserException(e.getMessage());

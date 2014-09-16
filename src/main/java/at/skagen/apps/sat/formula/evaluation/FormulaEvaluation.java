@@ -1,20 +1,18 @@
 package at.skagen.apps.sat.formula.evaluation;
 
-import java.util.Map;
-
-import at.skagen.apps.sat.formula.parser.ParserException;
-import at.skagen.apps.sat.parser.interpretation.InterpretationEvaluator;
+import at.skagen.apps.sat.formula.node.FormulaNode;
+import at.skagen.apps.sat.parser.interpretation.Interpretation;
 
 public class FormulaEvaluation extends CompleteInterpretedEvaluation<Boolean> {
 
-	private ParseTree formula;
+	private FormulaNode formula;
 	
-	private Map<String, Boolean> interpretations;
+	private Interpretation interpretation;
 	
-	public FormulaEvaluation(String formula, String interpretations) throws EvaluatorException, ParserException {
-		this.formula = new FormulaParser().parse(formula);
-		this.interpretations = new InterpretationEvaluator().evaluate(interpretations);
-		doSemanticalAnalysis(this.interpretations, this.formula.getRoot().registerSymbols());
+	public FormulaEvaluation(FormulaNode formula, Interpretation interpretation) {
+		this.formula = formula;
+		this.interpretation = interpretation;
+//		doSemanticalAnalysis(this.interpretations, this.formula.getRoot().registerSymbols());
 	}
 	
 	/**
@@ -22,6 +20,8 @@ public class FormulaEvaluation extends CompleteInterpretedEvaluation<Boolean> {
 	 */
 	@Override
 	public Boolean evaluate() throws EvaluatorException {
-		return formula.getRoot().evaluateBoolean(this, interpretations);
+		BooleanEvaluator evaluator = new BooleanEvaluator(interpretation);
+		evaluator.dispatchVisit(formula);
+		return evaluator.getResult();
 	}
 }
