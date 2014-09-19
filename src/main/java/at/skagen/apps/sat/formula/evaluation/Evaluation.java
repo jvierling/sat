@@ -1,6 +1,6 @@
 package at.skagen.apps.sat.formula.evaluation;
 
-public interface Evaluator<T> {
+public interface Evaluation<T> {
 
 	/**
 	 * Evaluates this evaluation.

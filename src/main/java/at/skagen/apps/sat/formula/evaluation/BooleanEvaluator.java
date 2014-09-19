@@ -1,8 +1,5 @@
 package at.skagen.apps.sat.formula.evaluation;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import at.skagen.apps.sat.formula.node.AndNode;
 import at.skagen.apps.sat.formula.node.ConstantNode;
 import at.skagen.apps.sat.formula.node.FormulaNode;
@@ -15,8 +12,6 @@ import at.skagen.apps.sat.formula.node.OrNode;
 import at.skagen.apps.sat.formula.node.VariableNode;
 import at.skagen.apps.sat.formula.node.Visitor;
 import at.skagen.apps.sat.formula.node.XorNode;
-import at.skagen.apps.sat.formula.parser.FormulaParser;
-import at.skagen.apps.sat.formula.parser.ParserException;
 import at.skagen.apps.sat.parser.interpretation.Interpretation;
 
 public class BooleanEvaluator implements Visitor<Boolean, Void> {
@@ -100,22 +95,5 @@ public class BooleanEvaluator implements Visitor<Boolean, Void> {
 
 	public boolean getResult() {
 		return result;
-	}
-	
-	public static void main(String[] args) throws ParserException {
-		String[] formulas = {
-				"1",
-				"0",
-				"A and B"
-		};
-		Map<String, Boolean> interpretation = new HashMap<String, Boolean>();
-		interpretation.put("A", true);
-		interpretation.put("B", true);
-		
-		for (String formula : formulas) {
-			BooleanEvaluator evaluator = new BooleanEvaluator(new Interpretation(interpretation));
-			evaluator.dispatchVisit(new FormulaParser().parse(formula));
-			System.out.println(evaluator.getResult());
-		}
 	}
 }
