@@ -28,6 +28,9 @@ public class TableauRenderer {
 		
 		char[][] renderedTableau = renderBorderedTableau(root);
 		
+		System.out.println(computeSurfaceHeight(root));
+		System.out.println("tableau height : " + renderedTableau.length);
+		
 		for (int i = 0; i < renderedTableau.length; i++) {
 			for (int j = 0; j < renderedTableau[i].length; j++) {
 				result += renderedTableau[i][j];
@@ -43,7 +46,9 @@ public class TableauRenderer {
 		int width  = computeSurfaceWidth(root)  + 2;
 		int height = computeSurfaceHeight(root) + 2;
 		
-		char[][] borderedTableau = newSurface(width + 2, height + 2);
+		System.out.println("height = " + height);
+		
+		char[][] borderedTableau = newSurface(width, height);
 		borderedTableau[0][0] 	  				= CORNER_SYMBOL;
 		borderedTableau[height - 1][width - 1]  = CORNER_SYMBOL;
 		borderedTableau[height - 1][0] 	  		= CORNER_SYMBOL;
