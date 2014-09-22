@@ -46,8 +46,6 @@ public class TableauRenderer {
 		int width  = computeSurfaceWidth(root)  + 2;
 		int height = computeSurfaceHeight(root) + 2;
 		
-		System.out.println("height = " + height);
-		
 		char[][] borderedTableau = newSurface(width, height);
 		borderedTableau[0][0] 	  				= CORNER_SYMBOL;
 		borderedTableau[height - 1][width - 1]  = CORNER_SYMBOL;
