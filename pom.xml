@@ -16,7 +16,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>Sat</mainClass>
+							<mainClass>at.skagen.apps.sat.ui.cli.Sat</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
