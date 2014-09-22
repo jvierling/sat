@@ -35,7 +35,7 @@ public class TableauRenderer {
 			result += "\n";
 		}
 		
-		return result.substring(0, result.length());
+		return result.substring(0, result.length() - 1);
 	}
 	
 	private char[][] renderBorderedTableau(TableauNode root) {
