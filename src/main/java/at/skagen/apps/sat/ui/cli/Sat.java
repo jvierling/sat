@@ -23,7 +23,7 @@ public class Sat {
 	}
 	
 	public static void main(String[] args) {
-		if (args.length > 1) {
+		if (args.length >= 1) {
 			String command = args[0];
 			String[] arguments = args.length < 2 ? null : Arrays.copyOfRange(args, 1, args.length);
 			try {
@@ -37,6 +37,30 @@ public class Sat {
 			} catch (EvaluatorException e) {
 				System.out.println("error : " + e.getMessage());
 			}
+		} else {
+			System.out.println(usage());
 		}
+	}
+	
+	private static String usage() {
+		
+		String usage = "";
+		
+		usage += "sat evaluate <formula> <interpretation>" + "\n"
+				+ "\t" + "evaluates a formula for an interpretation" + "\n\n";
+		usage += "sat evaluate formal <formula> <interpretation>" + "\n"
+				+ "\t" + "shows the formal evaluation of a formula for an interpretation" + "\n\n";
+		usage += "sat tableau <formula>" + "\n"
+				+ "\t" + "uses tableau calculus to determine satisfiability of a formula" + "\n\n";
+		usage += "sat cnf <formula>" + "\n"
+				+ "\t" + "calculates the formulas conjunctive normal form" + "\n\n";
+		usage += "sat dnf <formula>" + "\n" 
+				+ "\t" + "calculates the formulas conjunctive normal form" + "\n\n";
+		usage += "Examples :" + "\n\n"
+				+ "\t" + "sat evaluate \"A and not B\" \"I=(A=1,B=0)\"" + "\n"
+				+ "\t" + "sat tableau \"A nand B\"" + "\n"
+				+ "\t" + "sat dnf \"(A if 0) xor (A iff C)\"";
+		
+		return usage;
 	}
 }
