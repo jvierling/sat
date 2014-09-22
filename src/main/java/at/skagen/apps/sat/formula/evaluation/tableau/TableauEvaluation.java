@@ -20,7 +20,7 @@ public class TableauEvaluation implements UninterpretedEvaluation<TableauNode> {
 	 */
 	public TableauNode evaluate() throws EvaluatorException {
 		
-		TableauNode root = new TableauNode(new TableauFormula(formula, true));
+		TableauNode root = new TableauNode(new TableauFormula(formula, false));
 		
 		expandFormulas(root, new HashSet<TableauFormula>());
 		
