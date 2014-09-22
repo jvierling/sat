@@ -1,11 +1,9 @@
-package at.skagen.apps.sat.formula.evaluation;
+package at.skagen.apps.sat.formula.evaluation.tableau;
 
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import at.skagen.apps.sat.formula.evaluation.tableau.TableauFormula;
 
 public class TableauNode {
 

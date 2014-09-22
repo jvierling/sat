@@ -1,6 +1,7 @@
 package at.skagen.apps.sat.formula.evaluation;
 
 import at.skagen.apps.sat.formula.node.FormulaNode;
+import at.skagen.apps.sat.formula.util.BooleanEvaluator;
 import at.skagen.apps.sat.parser.interpretation.Interpretation;
 
 public class FormulaEvaluation extends CompleteInterpretedEvaluation<Boolean> {

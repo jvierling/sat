@@ -14,21 +14,19 @@ public class FormalEvaluation extends CompleteInterpretedEvaluation<List<String>
 	
 	private Interpretation interpretation;
 	
-	public FormalEvaluation(FormulaNode formula, Interpretation interpretation) throws EvaluatorException {
+	public FormalEvaluation(FormulaNode formula, Interpretation interpretation) {
 		FormalTransformer transformer = new FormalTransformer();
 		transformer.dispatchVisit(formula);
 		this.formula = transformer.getResult();
 		this.interpretation = interpretation;
-		// TODO
-//		doSemanticalAnalysis(this.interpretations, this.formula.getRoot().registerSymbols());
 	}
 	
 	@Override
 	public List<String> evaluate() throws EvaluatorException {
 		
-		List<String> steps = new LinkedList<String>();
+		doSemanticalAnalysis(interpretation, formula);
 		
-		steps.add("val(I, " + formula.toString() + ")");
+		List<String> steps = new LinkedList<String>();
 		
 		for (int limit = 0; !formula.isEvaluated(); limit++) {
 			steps.add(formula.evaluateFormal(interpretation, limit));

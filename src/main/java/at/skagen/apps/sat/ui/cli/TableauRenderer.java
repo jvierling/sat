@@ -3,8 +3,8 @@ package at.skagen.apps.sat.ui.cli;
 import java.util.LinkedList;
 import java.util.List;
 
-import at.skagen.apps.sat.formula.evaluation.TableauNode;
 import at.skagen.apps.sat.formula.evaluation.tableau.TableauFormula;
+import at.skagen.apps.sat.formula.evaluation.tableau.TableauNode;
 
 public class TableauRenderer {
 

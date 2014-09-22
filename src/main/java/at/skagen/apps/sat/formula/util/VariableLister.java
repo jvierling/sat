@@ -1,4 +1,4 @@
-package at.skagen.apps.sat.formula.evaluation;
+package at.skagen.apps.sat.formula.util;
 
 import java.util.HashSet;
 import java.util.Set;

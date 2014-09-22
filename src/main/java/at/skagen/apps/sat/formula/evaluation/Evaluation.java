@@ -8,5 +8,5 @@ public interface Evaluation<T> {
 	 * @return the evaluation result
 	 * @throws EvaluatorException if an error occured during evaluation
 	 */
-	public abstract T evaluate() throws EvaluatorException;
+	public T evaluate() throws EvaluatorException;
 }

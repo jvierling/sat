@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import at.skagen.apps.sat.formula.evaluation.TableauNode;
 import at.skagen.apps.sat.formula.node.AndNode;
 import at.skagen.apps.sat.formula.node.ConstantNode;
 import at.skagen.apps.sat.formula.node.FormulaNode;

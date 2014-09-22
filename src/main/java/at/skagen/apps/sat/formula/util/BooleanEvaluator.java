@@ -1,4 +1,4 @@
-package at.skagen.apps.sat.formula.evaluation;
+package at.skagen.apps.sat.formula.util;
 
 import at.skagen.apps.sat.formula.node.AndNode;
 import at.skagen.apps.sat.formula.node.ConstantNode;

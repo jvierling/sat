@@ -1,5 +1,6 @@
 package at.skagen.apps.sat.parser.interpretation;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,9 +15,9 @@ public class InterpretationParser {
 	
 	private Token currentToken = null;
 	
-	public ParseTree parse(String interpretation) throws ParserException {
+	public Interpretation parse(String interpretation) throws ParserException {
 		
-		ParseTree result = null;
+		InterpretationNode result = null;
 		
 		try {
 			tokens = new InterpretationLexer().lex(interpretation).iterator();
@@ -26,13 +27,30 @@ public class InterpretationParser {
 			}
 			currentToken = tokens.next();
 			
-			result = new ParseTree(interpretation());
+			result = interpretation();
 			
 		} catch (LexerException e) {
 			throw new ParserException(e.getMessage());
 		}
 		
-		return result;
+		return buildInterpretation(result);
+	}
+	
+	public Interpretation buildInterpretation(InterpretationNode node) throws ParserException {
+		
+		HashMap<String, Boolean> variableTable = new HashMap<String, Boolean>();
+		
+		for (VariableInterpretationNode variable : node.getChildren()) {
+			if (variableTable.get(variable.getIdentifier()) != null) {
+				throw new ParserException("multiple occurrences of variable " + variable.getIdentifier());
+			}
+			
+			boolean value = variable.getValue() == Verum ? true : false;
+			
+			variableTable.put(variable.getIdentifier(), value);
+		}
+		
+		return new Interpretation(variableTable);
 	}
 	
 	private boolean accept(Symbols symbol) {

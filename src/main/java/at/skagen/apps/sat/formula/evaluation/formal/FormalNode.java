@@ -1,9 +1,9 @@
 package at.skagen.apps.sat.formula.evaluation.formal;
 
-import at.skagen.apps.sat.formula.evaluation.BooleanEvaluator;
 import at.skagen.apps.sat.formula.node.FormulaDecorator;
 import at.skagen.apps.sat.formula.node.FormulaNode;
 import at.skagen.apps.sat.formula.printer.InfixPrinter;
+import at.skagen.apps.sat.formula.util.BooleanEvaluator;
 import at.skagen.apps.sat.parser.interpretation.Interpretation;
 
 public abstract class FormalNode extends FormulaDecorator {

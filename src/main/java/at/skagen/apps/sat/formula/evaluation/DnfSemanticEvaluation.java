@@ -12,6 +12,8 @@ import at.skagen.apps.sat.formula.node.FormulaNode;
 import at.skagen.apps.sat.formula.node.NotNode;
 import at.skagen.apps.sat.formula.node.OrNode;
 import at.skagen.apps.sat.formula.node.VariableNode;
+import at.skagen.apps.sat.formula.util.BooleanEvaluator;
+import at.skagen.apps.sat.formula.util.VariableLister;
 import at.skagen.apps.sat.parser.interpretation.Interpretation;
 
 public class DnfSemanticEvaluation implements UninterpretedEvaluation<FormulaNode> {

@@ -4,30 +4,27 @@ import java.util.HashSet;
 import java.util.Set;
 
 import at.skagen.apps.sat.formula.evaluation.EvaluatorException;
-import at.skagen.apps.sat.formula.evaluation.TableauNode;
 import at.skagen.apps.sat.formula.evaluation.UninterpretedEvaluation;
 import at.skagen.apps.sat.formula.node.FormulaNode;
-import at.skagen.apps.sat.formula.parser.ParserException;
-import at.skagen.apps.sat.ui.cli.TableauRenderer;
 
-public class TableauEvaluation implements UninterpretedEvaluation<String> {
+public class TableauEvaluation implements UninterpretedEvaluation<TableauNode> {
 
 	private FormulaNode formula;
 	
-	public TableauEvaluation(FormulaNode formula) throws ParserException {
+	public TableauEvaluation(FormulaNode formula) {
 		this.formula = formula;
 	}
 	
 	/**
 	 * Evaluates a formulas satisfiability using tableau calculus.
 	 */
-	public String evaluate() throws EvaluatorException {
+	public TableauNode evaluate() throws EvaluatorException {
 		
 		TableauNode root = new TableauNode(new TableauFormula(formula, true));
 		
 		expandFormulas(root, new HashSet<TableauFormula>());
 		
-		return new TableauRenderer().renderTableau(root);
+		return root;
 	}
 	
 	private void expandFormulas(TableauNode root, Set<TableauFormula> unexpanded) {
