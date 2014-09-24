@@ -88,7 +88,7 @@ public class LinearPrinter implements Visitor<String, Void> {
 
 	public String visit(NotNode formula, Void parameter) {
 		String operand  = formula.getOperand().accept(this, null);
-		return "not (" + operand + ")";
+		return "not " + operand;
 	}
 
 	public String visit(VariableNode formula, Void parameter) {
