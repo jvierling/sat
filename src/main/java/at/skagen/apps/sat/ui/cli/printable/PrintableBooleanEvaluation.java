@@ -19,6 +19,6 @@ public class PrintableBooleanEvaluation implements PrintableEvaluation {
 	public String evaluate() throws EvaluatorException {
 		LinearPrinter printer = new LinearPrinter();
 		printer.dispatchVisit(formula);
-		return "val(I," + printer.getResult() + ") = " + (evaluation.evaluate() ? "0" : "1");
+		return "val(I," + printer.getResult() + ") = " + (evaluation.evaluate() ? "1" : "0");
 	}
 }

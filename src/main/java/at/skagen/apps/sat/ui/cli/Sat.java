@@ -46,17 +46,21 @@ public class Sat {
 		
 		String usage = "";
 		
-		usage += "sat evaluate <formula> <interpretation>" + "\n"
-				+ "\t" + "evaluates a formula for an interpretation" + "\n\n";
-		usage += "sat evaluate formal <formula> <interpretation>" + "\n"
-				+ "\t" + "shows the formal evaluation of a formula for an interpretation" + "\n\n";
-		usage += "sat tableau <formula>" + "\n"
-				+ "\t" + "uses tableau calculus to determine satisfiability of a formula" + "\n\n";
-		usage += "sat cnf <formula>" + "\n"
-				+ "\t" + "calculates the formulas conjunctive normal form" + "\n\n";
-		usage += "sat dnf <formula>" + "\n" 
-				+ "\t" + "calculates the formulas conjunctive normal form" + "\n\n";
-		usage += "Examples :" + "\n\n"
+		usage += "usage : sat " + "<command> [<arguments>]\n\n";
+		
+		usage += "The commands are :\n";
+		
+		usage += "\t" + "evaluate <formula> <interpretation>" + "\n"
+				+ "\t\t" + "evaluates a formula for an interpretation" + "\n\n";
+		usage += "\t" + "evaluate formal <formula> <interpretation>" + "\n"
+				+ "\t\t" + "shows the formal evaluation of a formula for an interpretation" + "\n\n";
+		usage += "\t" + "tableau <formula>" + "\n"
+				+ "\t\t" + "uses tableau calculus to determine satisfiability of a formula" + "\n\n";
+		usage += "\t" + "cnf <formula>" + "\n"
+				+ "\t\t" + "calculates the formulas conjunctive normal form" + "\n\n";
+		usage += "\t" + "dnf <formula>" + "\n" 
+				+ "\t\t" + "calculates the formulas conjunctive normal form" + "\n\n";
+		usage += "Examples :" + "\n"
 				+ "\t" + "sat evaluate \"A and not B\" \"I=(A=1,B=0)\"" + "\n"
 				+ "\t" + "sat tableau \"A nand B\"" + "\n"
 				+ "\t" + "sat dnf \"(A if 0) xor (A iff C)\"";
