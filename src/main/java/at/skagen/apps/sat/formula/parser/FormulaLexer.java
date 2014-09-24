@@ -3,14 +3,15 @@ package at.skagen.apps.sat.formula.parser;
 import java.util.LinkedList;
 import java.util.List;
 
+import at.skagen.apps.sat.formula.util.Tokenizer;
 import static at.skagen.apps.sat.formula.parser.FormulaTokens.*;
 
 public class FormulaLexer {
 
 	public List<Token> lex(String formula) throws LexerException {
 		
-		String[] stringTokens = formula.split("\\s+|(?<=\\()|(?=\\)|(?=,)|(?==))");
-		List<Token> tokens 	  = new LinkedList<Token>();
+		List<String> stringTokens = new Tokenizer("\\(", "\\)").tokenize(formula);
+		List<Token> tokens = new LinkedList<Token>();
 		
 		for (String token : stringTokens) {
 			if ("and".equals(token)) {
