@@ -10,7 +10,6 @@ import at.skagen.apps.sat.formula.node.AndNode;
 import at.skagen.apps.sat.formula.node.ConstantNode;
 import at.skagen.apps.sat.formula.node.FormulaNode;
 import at.skagen.apps.sat.formula.node.VariableNode;
-import at.skagen.apps.sat.ui.cli.TableauRenderer;
 
 public class AbstractTableauEvaluationTest {
 
