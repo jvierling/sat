@@ -28,9 +28,6 @@ public class TableauRenderer {
 		
 		char[][] renderedTableau = renderBorderedTableau(root);
 		
-		System.out.println(computeSurfaceHeight(root));
-		System.out.println("tableau height : " + renderedTableau.length);
-		
 		for (int i = 0; i < renderedTableau.length; i++) {
 			for (int j = 0; j < renderedTableau[i].length; j++) {
 				result += renderedTableau[i][j];

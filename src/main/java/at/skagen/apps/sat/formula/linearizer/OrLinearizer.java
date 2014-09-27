@@ -15,9 +15,6 @@ import at.skagen.apps.sat.formula.node.OrNode;
 import at.skagen.apps.sat.formula.node.VariableNode;
 import at.skagen.apps.sat.formula.node.Visitor;
 import at.skagen.apps.sat.formula.node.XorNode;
-import at.skagen.apps.sat.formula.parser.FormulaParser;
-import at.skagen.apps.sat.formula.parser.ParserException;
-import at.skagen.apps.sat.formula.printer.InfixPrinter;
 
 public class OrLinearizer implements Visitor<List<FormulaNode>, Void> {
 
@@ -91,15 +88,5 @@ public class OrLinearizer implements Visitor<List<FormulaNode>, Void> {
 	
 	public List<FormulaNode> getResult() {
 		return result;
-	}
-	
-	public static void main(String[] args) throws ParserException {
-		OrLinearizer linearizer = new OrLinearizer();
-		linearizer.dispatchVisit(new FormulaParser().parse("A or B or C or (D and B and C)"));
-		for (FormulaNode formula : linearizer.getResult()) {
-			InfixPrinter printer = new InfixPrinter();
-			printer.dispatchVisit(formula);
-			System.out.println(printer.getResult());
-		}
 	}
 }

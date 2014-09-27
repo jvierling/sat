@@ -16,8 +16,6 @@ import at.skagen.apps.sat.formula.node.OrNode;
 import at.skagen.apps.sat.formula.node.VariableNode;
 import at.skagen.apps.sat.formula.node.Visitor;
 import at.skagen.apps.sat.formula.node.XorNode;
-import at.skagen.apps.sat.formula.parser.FormulaParser;
-import at.skagen.apps.sat.formula.parser.ParserException;
 
 public class LinearPrinter implements Visitor<String, Void> {
 
@@ -106,16 +104,5 @@ public class LinearPrinter implements Visitor<String, Void> {
 	
 	public String getResult() {
 		return result;
-	}
-
-	public static void main(String[] args) throws ParserException {
-		String[] formulas =  {
-				"A and B and C or D or E"
-		};
-		for (String formula : formulas) {
-			LinearPrinter printer = new LinearPrinter();
-			printer.dispatchVisit(new FormulaParser().parse(formula));
-			System.out.println(printer.getResult());
-		}
 	}
 }
