@@ -35,6 +35,10 @@ public class FormulaParser {
 			
 			result = formula();
 			
+			if (currentToken != null) {
+				throw new ParserException("unexpected token " + currentToken.getContent());
+			}
+			
 		} catch (LexerException e) {
 			throw new ParserException(e.getMessage());
 		}
@@ -175,7 +179,7 @@ public class FormulaParser {
 		} else if (accept(Lparen)) {
 			node = formula();
 			if (!accept(Rparen)) {
-				throw new ParserException("expected ')' but got " + currentToken.getContent());
+				throw new ParserException("expected ')' but got " + tokenToString(currentToken));
 			}
 		} else if (currentToken.getSymbol().equals(Variable)) {
 			node = new VariableNode(currentToken.getContent());
@@ -185,9 +189,13 @@ public class FormulaParser {
 		} else if (accept(Falsum)) {
 			node = new ConstantNode(false);
 		} else {
-			throw new ParserException("expected 'not', variable, '1', '0' but got " + currentToken.getContent());
+			throw new ParserException("expected 'not', variable, '1', '0' but got " + tokenToString(currentToken));
 		}
 		
 		return node;
+	}
+	
+	private String tokenToString(Token token) {
+		return token == null ? "nothing" : token.getContent();
 	}
 }

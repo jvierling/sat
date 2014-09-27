@@ -72,6 +72,6 @@ public class TableauNode {
 			}
 		}
 		
-		return false;
+		return children.size() > 0 ? true : false;
 	}
 }
