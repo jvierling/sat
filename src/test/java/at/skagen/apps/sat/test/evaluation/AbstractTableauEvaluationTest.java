@@ -19,14 +19,12 @@ public class AbstractTableauEvaluationTest {
 	private FormulaNode contradiction      = new AndNode(satisfiableFormula, new ConstantNode(false));
 	
 	@Test
-	public void satisfiableFormulaShouldEvaluateToClosedTableau() throws EvaluatorException {
-		System.out.println(new TableauRenderer().renderTableau(new TableauEvaluation(satisfiableFormula).evaluate()));
-		System.out.println(new TableauEvaluation(satisfiableFormula).evaluate().isClosed());
-		assertTrue(new TableauEvaluation(satisfiableFormula).evaluate().isClosed());
+	public void satisfiableFormulaShouldEvaluateToUnclosedTableau() throws EvaluatorException {
+		assertFalse(new TableauEvaluation(satisfiableFormula).evaluate().isClosed());
 	}
 	
 	@Test
-	public void contradictionFormulaShouldEvaluateToUnclosedTableau() throws EvaluatorException {
-		assertFalse(new TableauEvaluation(contradiction).evaluate().isClosed());
+	public void contradictionFormulaShouldEvaluateToClosedTableau() throws EvaluatorException {
+		assertTrue(new TableauEvaluation(contradiction).evaluate().isClosed());
 	}
 }
